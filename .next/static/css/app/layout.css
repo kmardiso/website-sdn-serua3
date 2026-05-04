@@ -1,0 +1,37 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/globals.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0d2660;
+  --gold: #c8a84b;
+  --bg: #f8f7f4;
+  --white: #ffffff;
+  --text: #1a2340;
+  --muted: #6b6860;
+  --border: #e8e5de;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+input, textarea, select, button {
+  font-family: var(--font-body);
+}
+
