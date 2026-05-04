@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Website SD Negeri Serua 3
 
 Website resmi SD Negeri Serua 3, Tangerang Selatan.  
@@ -159,3 +160,6 @@ npm start
 
 Untuk Vercel: tambahkan env vars di Settings → Environment Variables.  
 Untuk VPS: gunakan PM2 + Nginx reverse proxy.
+=======
+# website-sdn-serua3
+>>>>>>> 9dc6a5ef6866072ada906533a0be70e86b77f93c
