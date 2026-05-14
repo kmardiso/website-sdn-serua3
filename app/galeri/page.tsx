@@ -4,7 +4,7 @@ async function getGaleri(kategori?: string) {
   try {
     const params = new URLSearchParams({ limit: '24' })
     if (kategori) params.set('kategori', kategori)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/galeri?${params}`, { next: { revalidate: 300 } })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/galeri?${params}`, { cache: 'no-store' })
     const json = await res.json()
     return json.data || []
   } catch { return [] }
@@ -13,7 +13,11 @@ async function getGaleri(kategori?: string) {
 export default async function GaleriPage() {
   const galeriList = await getGaleri()
 
-  const kategoriList = [...new Set(galeriList.map((g: any) => g.kategori).filter(Boolean))]
+  const kategoriSet: string[] = []
+  galeriList.forEach((g: any) => {
+    if (g.kategori && !kategoriSet.includes(g.kategori)) kategoriSet.push(g.kategori)
+  })
+  const kategoriList = kategoriSet
 
   return (
     <>
@@ -32,7 +36,6 @@ export default async function GaleriPage() {
         </div>
       </nav>
 
-      {/* HERO */}
       <section style={{ background: '#0d2660', padding: '3rem 2rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
           <div style={{ fontFamily: 'Playfair Display,serif', fontSize: '2rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>Galeri Kegiatan</div>
@@ -42,8 +45,6 @@ export default async function GaleriPage() {
 
       <section style={{ padding: '3rem 2rem', background: '#f8f7f4', minHeight: '60vh' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
-
-          {/* FILTER KATEGORI */}
           {kategoriList.length > 0 && (
             <div style={{ display: 'flex', gap: 8, marginBottom: '1.5rem', flexWrap: 'wrap' }}>
               {['Semua', ...kategoriList].map((k: any) => (
@@ -52,7 +53,6 @@ export default async function GaleriPage() {
             </div>
           )}
 
-          {/* GRID FOTO */}
           {galeriList.length > 0 ? (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12 }}>
               {galeriList.map((g: any) => (
@@ -83,7 +83,6 @@ export default async function GaleriPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer style={{ background: '#0b1e4d', padding: '1.5rem 2rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12 }}>© {new Date().getFullYear()} SD Negeri Serua 3 — Tangerang Selatan</p>
