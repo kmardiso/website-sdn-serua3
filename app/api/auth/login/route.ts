@@ -5,6 +5,8 @@ import { ok, err } from '@/lib/response'
 import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
@@ -19,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const token = await signToken({ id: admin.id, email: admin.email, role: admin.role, nama: admin.nama })
 
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     cookieStore.set('auth-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
