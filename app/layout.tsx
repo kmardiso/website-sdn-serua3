@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'SD Negeri Serua 3 - Tangerang Selatan',
   description: 'Website resmi SD Negeri Serua 3, Ciputat, Kota Tangerang Selatan. NPSN 20604893.',
-  keywords: 'SDN Serua 3, sekolah dasar, Tangerang Selatan, Ciputat, PPDB',
+  keywords: 'SDN Serua 3, sekolah dasar, Tangerang Selatan, Ciputat',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -14,4 +16,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
-export const dynamic = 'force-dynamic'

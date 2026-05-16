@@ -80,7 +80,7 @@ export default async function HomePage() {
             SD Negeri Serua 3 berkomitmen menghadirkan pendidikan berkualitas yang mengintegrasikan nilai-nilai Pancasila, ilmu pengetahuan, dan pengembangan karakter sejak dini.
           </p>
           <div style={{ display: 'flex', gap: 12 }}>
-            <Link href="/ppdb" style={{ background: '#c8a84b', color: '#0d2660', fontWeight: 600, fontSize: 13, padding: '10px 22px', borderRadius: 6 }}>Penerimaan Siswa Baru</Link>
+            
             <Link href="/profil" style={{ background: 'transparent', color: 'rgba(255,255,255,0.8)', fontWeight: 500, fontSize: 13, padding: '10px 22px', borderRadius: 6, border: '1px solid rgba(255,255,255,0.25)' }}>Profil Sekolah</Link>
           </div>
         </div>
@@ -276,9 +276,9 @@ export default async function HomePage() {
             <div>
               <div style={{ color: '#c8a84b', fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Layanan</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-                {[['/ppdb', 'PPDB Online'], ['/akademik', 'Kalender Akademik'], ['/kontak', 'Kontak Kami']].map(([href, label]) => (
+                {[[['/akademik', 'Kalender Akademik'], ['/kontak', 'Kontak Kami']].map(([href, label]) => (
                   <Link key={href} href={href} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12.5 }}>{label}</Link>
-                ))}
+                ))]}
               </div>
             </div>
           </div>
