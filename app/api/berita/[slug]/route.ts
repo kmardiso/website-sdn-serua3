@@ -3,32 +3,30 @@ import { prisma } from '@/lib/prisma'
 import { ok, err } from '@/lib/response'
 import { getAuthUser } from '@/lib/auth'
 
-export async function GET(_req: NextRequest, { params }: { params: { slug: string } }) {
+export const dynamic = 'force-dynamic'
+
+export async function GET(_req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
-    const berita = await prisma.berita.findUnique({
-      where: { slug: params.slug },
-    })
+    const { slug } = await params
+    const berita = await prisma.berita.findUnique({ where: { slug } })
     if (!berita) return err('Berita tidak ditemukan', 404)
     return ok(berita)
   } catch (e) {
-    console.error(e)
     return err('Server error', 500)
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const user = await getAuthUser()
     if (!user) return err('Unauthorized', 401)
-
+    const { slug } = await params
     const body = await req.json()
     const { judul, konten, ringkasan, gambar, kategori, status } = body
-
-    const existing = await prisma.berita.findUnique({ where: { slug: params.slug } })
+    const existing = await prisma.berita.findUnique({ where: { slug } })
     if (!existing) return err('Berita tidak ditemukan', 404)
-
     const updated = await prisma.berita.update({
-      where: { slug: params.slug },
+      where: { slug },
       data: {
         judul: judul || existing.judul,
         konten: konten || existing.konten,
@@ -36,27 +34,23 @@ export async function PUT(req: NextRequest, { params }: { params: { slug: string
         gambar: gambar !== undefined ? gambar : existing.gambar,
         kategori: kategori || existing.kategori,
         status: status || existing.status,
-        publishedAt:
-          status === 'PUBLISHED' && !existing.publishedAt ? new Date() : existing.publishedAt,
+        publishedAt: status === 'PUBLISHED' && !existing.publishedAt ? new Date() : existing.publishedAt,
       },
     })
-
     return ok(updated)
   } catch (e) {
-    console.error(e)
     return err('Server error', 500)
   }
 }
 
-export async function DELETE(_req: NextRequest, { params }: { params: { slug: string } }) {
+export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const user = await getAuthUser()
     if (!user) return err('Unauthorized', 401)
-
-    await prisma.berita.delete({ where: { slug: params.slug } })
+    const { slug } = await params
+    await prisma.berita.delete({ where: { slug } })
     return ok({ message: 'Berita dihapus' })
   } catch (e) {
-    console.error(e)
     return err('Server error', 500)
   }
 }
