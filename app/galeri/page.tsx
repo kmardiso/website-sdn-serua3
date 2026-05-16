@@ -13,7 +13,7 @@ async function getGaleri(kategori?: string) {
 export default async function GaleriPage() {
   const galeriList = await getGaleri()
 
-  const kategoriSet: string[] = []
+  const kategoriSet: string[] = Array.from(new Set<string>(galeriList.map((g: any) => g.kategori).filter(Boolean)))
   galeriList.forEach((g: any) => {
     if (g.kategori && !kategoriSet.includes(g.kategori)) kategoriSet.push(g.kategori)
   })
