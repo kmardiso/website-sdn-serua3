@@ -1,33 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy: #0d2660;
-  --gold: #c8a84b;
-  --bg: #f8f7f4;
+  --navy: #1B2D6B;
+  --navy-dark: #0f1d4a;
+  --gold: #C8A84B;
+  --gold-light: #e8c96b;
+  --blue-light: #EEF2FF;
   --white: #ffffff;
-  --text: #1a2340;
-  --muted: #6b6860;
-  --border: #e8e5de;
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --gray: #f8f9fa;
+  --gray-2: #f1f3f9;
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --font: 'Plus Jakarta Sans', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font);
   color: var(--text);
-  background: var(--bg);
+  background: var(--white);
   font-size: 14px;
   line-height: 1.6;
 }
 
 a { text-decoration: none; color: inherit; }
-
 img { max-width: 100%; height: auto; display: block; }
+button { font-family: var(--font); cursor: pointer; }
 
-input, textarea, select, button {
-  font-family: var(--font-body);
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .grid-2 { grid-template-columns: 1fr !important; }
+  .grid-3 { grid-template-columns: 1fr !important; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
 }
