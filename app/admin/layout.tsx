@@ -1,15 +1,18 @@
-import AdminSidebar from '@/app/admin/layout/adminsidebar'
+import type { Metadata } from 'next'
+import '../globals.css'
 
-// export default function AdminLayout({ children }: { children: React.ReactNode }) {
-//   return (
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
-(
-    <div style={{ minHeight: '100vh', background: '#f8f7f4', display: 'flex' }}>
-      <AdminSidebar />
-      <main style={{ marginLeft: 220, flex: 1, padding: '2rem', minWidth: 0 }}>
-        {children}
-      </main>
-    </div>
+export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  title: 'SD Negeri Serua 3 - Tangerang Selatan',
+  description: 'Website resmi SD Negeri Serua 3, Ciputat, Kota Tangerang Selatan. NPSN 20604893.',
+  keywords: 'SDN Serua 3, sekolah dasar, Tangerang Selatan, Ciputat',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="id">
+      <body>{children}</body>
+    </html>
   )
 }
