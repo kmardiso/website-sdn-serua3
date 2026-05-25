@@ -22,9 +22,9 @@ async function getBerita() {
 }
 
 const fotoSekolah = [
-  'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80',
-  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80',
-  'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80',
+  'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500&q=50',
+  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=50',
+  'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&q=50',
 ]
 
 export default async function HomePage() {
