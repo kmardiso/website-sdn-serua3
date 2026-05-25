@@ -21,11 +21,11 @@ async function getGuru() {
 
 const fotoGuru = [
   'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=100&q=10',
-  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=10',
-  'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=100&q=10',
-  'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=10',
-  'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=10',
-  'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=100&q=10',
+  // 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=10',
+  // 'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=100&q=10',
+  // 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=10',
+  // 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=10',
+  // 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=100&q=10',
 ]
 
 export default async function ProfilPage() {
