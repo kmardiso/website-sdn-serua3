@@ -14,14 +14,14 @@ async function getGaleri() {
 
 const fotoSekolah = [
   { url: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=200&q=10', judul: 'Kegiatan Belajar Mengajar', kategori: 'Kegiatan' },
-  // { url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200&q=10', judul: 'Perpustakaan Sekolah', kategori: 'Fasilitas' },
-  // { url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=200&q=10', judul: 'Laboratorium Komputer', kategori: 'Fasilitas' },
-  // { url: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=200&q=10', judul: 'Upacara Bendera', kategori: 'Kegiatan' },
-  // { url: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=200&q=10', judul: 'Kegiatan Olahraga', kategori: 'Olahraga' },
-  // { url: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=200&q=10', judul: 'Pembelajaran Outdoor', kategori: 'Kegiatan' },
-  // { url: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=200&q=10', judul: 'Pentas Seni Siswa', kategori: 'Prestasi' },
-  // { url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=200&q=10', judul: 'Lomba Cerdas Cermat', kategori: 'Prestasi' },
-  // { url: 'https://images.unsplash.com/photo-1543269664-7eef42226a21?w=200&q=10', judul: 'Kegiatan Ekstrakulikuler', kategori: 'Kegiatan' },
+  { url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200&q=10', judul: 'Perpustakaan Sekolah', kategori: 'Fasilitas' },
+  { url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=200&q=10', judul: 'Laboratorium Komputer', kategori: 'Fasilitas' },
+  { url: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=200&q=10', judul: 'Upacara Bendera', kategori: 'Kegiatan' },
+  { url: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=200&q=10', judul: 'Kegiatan Olahraga', kategori: 'Olahraga' },
+  { url: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=200&q=10', judul: 'Pembelajaran Outdoor', kategori: 'Kegiatan' },
+  { url: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=200&q=10', judul: 'Pentas Seni Siswa', kategori: 'Prestasi' },
+  { url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=200&q=10', judul: 'Lomba Cerdas Cermat', kategori: 'Prestasi' },
+  { url: 'https://images.unsplash.com/photo-1543269664-7eef42226a21?w=200&q=10', judul: 'Kegiatan Ekstrakulikuler', kategori: 'Kegiatan' },
 ]
 
 export default async function GaleriPage() {

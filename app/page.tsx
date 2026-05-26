@@ -1,9 +1,8 @@
-'use client'
 import Link from 'next/link'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 async function getInfo() {
   try {
@@ -23,8 +22,8 @@ async function getBerita() {
 
 const fotoSekolah = [
   'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500&q=30',
-//   'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=30',
-//   'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&q=30',
+  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=30',
+  'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&q=30',
 ]
 
 export default async function HomePage() {

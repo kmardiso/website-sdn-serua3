@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 async function getBerita() {
   try {
@@ -14,11 +14,11 @@ async function getBerita() {
 
 const fotoBerita = [
   'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=30',
-  // 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=30',
-  // 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=100&q=10',
+  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=30',
+  'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=100&q=10',
+  'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=100&q=10',
+  'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=100&q=10',
+  'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=100&q=10',
 ]
 
 const kategoriLabel: Record<string, string> = {
