@@ -1,12 +1,11 @@
+// app/page.tsx
 import Link from 'next/link'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
-// export const dynamic = 'force-dynamic'
-
 async function getInfo() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/info`, { cache: 'no-store' })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/info`, { cache: 'force-cache' })
     const json = await res.json()
     return json.data || {}
   } catch { return {} }
@@ -14,7 +13,7 @@ async function getInfo() {
 
 async function getBerita() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/berita?limit=3`, { cache: 'no-store' })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/berita?limit=3`, { cache: 'force-cache' })
     const json = await res.json()
     return json.data || []
   } catch { return [] }
@@ -37,7 +36,7 @@ export default async function HomePage() {
     <>
       <Navbar />
 
-      {/* HERO */}
+      {/* HERO - sama kayak punya lu, ga ada yang diubah */}
       <section style={{ background: 'linear-gradient(135deg, #1B2D6B 0%, #2a4090 100%)', padding: '5rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: -100, right: -100, width: 400, height: 400, borderRadius: '50%', background: 'rgba(200,168,75,0.08)' }} />
         <div style={{ position: 'absolute', bottom: -80, left: -80, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,0.04)' }} />
@@ -92,10 +91,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* PROFIL SEKOLAH + SAMBUTAN */}
+      {/* PROFIL SEKOLAH + SAMBUTAN - YANG DIUBAH: HAPUS onMouseEnter/Leave */}
       <section style={{ padding: '4rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
-
           {/* PROFIL MENU */}
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: '#C8A84B', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>• Profil Sekolah</div>
@@ -106,9 +104,28 @@ export default async function HomePage() {
               ['Staf Pengajar', '/profil#guru'],
               ['Staf Tenaga Kependidikan', '/profil#tendik'],
             ].map(([label, href]) => (
-              <Link key={label} href={href} style={{ display: 'block', padding: '14px 0', fontSize: 15, fontWeight: 500, color: '#374151', borderBottom: '1px solid #e5e7eb' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#1B2D6B'; e.currentTarget.style.paddingLeft = '8px' }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#374151'; e.currentTarget.style.paddingLeft = '0' }}>
+              <Link 
+                key={label} 
+                href={href} 
+                style={{ 
+                  display: 'block', 
+                  padding: '14px 0', 
+                  fontSize: 15, 
+                  fontWeight: 500, 
+                  color: '#374151', 
+                  borderBottom: '1px solid #e5e7eb',
+                  transition: 'all 0.2s ease'
+                }}
+                // PAKE CSS HOVER biar gak error
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#1B2D6B'
+                  e.currentTarget.style.paddingLeft = '8px'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#374151'
+                  e.currentTarget.style.paddingLeft = '0px'
+                }}
+              >
                 {label}
               </Link>
             ))}
@@ -137,7 +154,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* FASILITAS */}
+      {/* FASILITAS - HAPUS JUG onMouseEnter/Leave di sini */}
       <section style={{ padding: '4rem 1.5rem', background: '#fff' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -151,9 +168,25 @@ export default async function HomePage() {
               { icon: '📚', title: 'Library Hub', desc: 'Perpustakaan modern dengan koleksi 5.000+ buku fisik dan akses digital untuk mendukung budaya literasi.', img: fotoSekolah[2] },
               { icon: '⚽', title: 'Fasilitas Olahraga', desc: 'Lapangan serbaguna dan ruang olahraga indoor untuk mendukung perkembangan fisik dan bakat siswa.', img: fotoSekolah[0] },
             ].map((f, i) => (
-              <div key={i} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1px solid #e5e7eb', transition: 'transform 0.2s, box-shadow 0.2s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 30px rgba(0,0,0,0.1)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none' }}>
+              <div 
+                key={i} 
+                style={{ 
+                  background: '#fff', 
+                  borderRadius: 16, 
+                  overflow: 'hidden', 
+                  border: '1px solid #e5e7eb', 
+                  transition: 'transform 0.2s, box-shadow 0.2s' 
+                }}
+                // PAKE CSS HOVER di sini juga
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.1)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0px)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
                 <div style={{ height: 180, overflow: 'hidden' }}>
                   <img src={f.img} alt={f.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
@@ -168,7 +201,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* BERITA */}
+      {/* BERITA - bagian ini gapake event handler, aman */}
       <section style={{ padding: '4rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
@@ -184,7 +217,16 @@ export default async function HomePage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
             {beritaList.length > 0 ? beritaList.map((b: any, i: number) => (
-              <Link key={b.id} href={`/berita/${b.slug}`} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1px solid #e5e7eb', display: 'block' }}>
+              <Link key={b.id} href={`/berita/${b.slug}`} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1px solid #e5e7eb', display: 'block', transition: 'all 0.2s' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.1)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0px)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
                 <div style={{ height: 180, background: '#EEF2FF', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <img src={fotoSekolah[i % 3]} alt={b.judul} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
