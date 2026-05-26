@@ -1,23 +1,9 @@
-// app/page.tsx
+'use client'
+
 import Link from 'next/link'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-
-async function getInfo() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/info`, { cache: 'force-cache' })
-    const json = await res.json()
-    return json.data || {}
-  } catch { return {} }
-}
-
-async function getBerita() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/berita?limit=3`, { cache: 'force-cache' })
-    const json = await res.json()
-    return json.data || []
-  } catch { return [] }
-}
+import { useEffect, useState } from 'react'
 
 const fotoSekolah = [
   'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500&q=30',
@@ -25,8 +11,25 @@ const fotoSekolah = [
   'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&q=30',
 ]
 
-export default async function HomePage() {
-  const [info, beritaList] = await Promise.all([getInfo(), getBerita()])
+export default function HomePage() {
+  const [info, setInfo] = useState<any>({})
+  const [beritaList, setBeritaList] = useState<any[]>([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [infoRes, beritaRes] = await Promise.all([
+          fetch('/api/info').then(res => res.json()),
+          fetch('/api/berita?limit=3').then(res => res.json())
+        ])
+        setInfo(infoRes.data || {})
+        setBeritaList(beritaRes.data || [])
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    fetchData()
+  }, []) // Array kosong = fetch SEKALI aja pas pertama load
 
   const kategoriLabel: Record<string, string> = {
     PENGUMUMAN: 'Pengumuman', PRESTASI: 'Prestasi', KEGIATAN: 'Kegiatan', INFORMASI: 'Informasi',
@@ -36,7 +39,7 @@ export default async function HomePage() {
     <>
       <Navbar />
 
-      {/* HERO - sama kayak punya lu, ga ada yang diubah */}
+      {/* HERO SECTION - Copy dari kode lu sebelumnya, sama persis */}
       <section style={{ background: 'linear-gradient(135deg, #1B2D6B 0%, #2a4090 100%)', padding: '5rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: -100, right: -100, width: 400, height: 400, borderRadius: '50%', background: 'rgba(200,168,75,0.08)' }} />
         <div style={{ position: 'absolute', bottom: -80, left: -80, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,0.04)' }} />
@@ -74,7 +77,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* STATS */}
+      {/* STATS SECTION */}
       <section style={{ background: '#fff', padding: '2.5rem 1.5rem', borderBottom: '1px solid #e5e7eb' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', textAlign: 'center' }}>
           {[
@@ -91,10 +94,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* PROFIL SEKOLAH + SAMBUTAN - YANG DIUBAH: HAPUS onMouseEnter/Leave */}
+      {/* PROFIL MENU & SAMBUTAN */}
       <section style={{ padding: '4rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
-          {/* PROFIL MENU */}
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: '#C8A84B', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>• Profil Sekolah</div>
             {[
@@ -116,7 +118,6 @@ export default async function HomePage() {
                   borderBottom: '1px solid #e5e7eb',
                   transition: 'all 0.2s ease'
                 }}
-                // PAKE CSS HOVER biar gak error
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = '#1B2D6B'
                   e.currentTarget.style.paddingLeft = '8px'
@@ -131,7 +132,6 @@ export default async function HomePage() {
             ))}
           </div>
 
-          {/* SAMBUTAN */}
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: '#6b7280', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>SAMBUTAN KEPALA SEKOLAH</div>
             <h2 style={{ fontWeight: 800, fontSize: '1.75rem', color: '#1B2D6B', marginBottom: 20, lineHeight: 1.3 }}>
@@ -154,7 +154,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* FASILITAS - HAPUS JUG onMouseEnter/Leave di sini */}
+      {/* FASILITAS */}
       <section style={{ padding: '4rem 1.5rem', background: '#fff' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -177,7 +177,6 @@ export default async function HomePage() {
                   border: '1px solid #e5e7eb', 
                   transition: 'transform 0.2s, box-shadow 0.2s' 
                 }}
-                // PAKE CSS HOVER di sini juga
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)'
                   e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.1)'
@@ -201,7 +200,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* BERITA - bagian ini gapake event handler, aman */}
+      {/* BERITA SECTION */}
       <section style={{ padding: '4rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
@@ -256,7 +255,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA SECTION */}
       <section style={{ background: 'linear-gradient(135deg, #1B2D6B, #2a4090)', padding: '4rem 1.5rem', textAlign: 'center' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           <h2 style={{ fontWeight: 800, fontSize: '2rem', color: '#fff', marginBottom: 16 }}>Siap Bergabung dengan Keluarga Besar Kami?</h2>
