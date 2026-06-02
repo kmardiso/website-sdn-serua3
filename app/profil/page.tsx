@@ -1,7 +1,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-
-// export const dynamic = 'force-dynamic'
+import ProfilSidebar from '@/components/layout/ProfilSidebar'
 
 async function getInfo() {
   try {
@@ -21,25 +20,17 @@ async function getGuru() {
 
 const fotoGuru = [
   'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=10',
-  // 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=100&q=10',
+  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=10',
+  'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=100&q=10',
+  'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=10',
+  'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=10',
+  'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=100&q=10',
 ]
 
 export default async function ProfilPage() {
   const [info, guruList] = await Promise.all([getInfo(), getGuru()])
   const pengajar = guruList.filter((g: any) => g.mapel || g.jabatan?.toLowerCase().includes('guru'))
   const tendik = guruList.filter((g: any) => !g.mapel && !g.jabatan?.toLowerCase().includes('guru'))
-
-  const sidebarMenu = [
-    { id: 'identitas', label: 'Identitas Sekolah', icon: '🏫' },
-    { id: 'visi', label: 'Visi & Misi', icon: '🎯' },
-    { id: 'struktur', label: 'Struktur Organisasi', icon: '📊' },
-    { id: 'guru', label: 'Staf Pengajar', icon: '👨‍🏫' },
-    { id: 'tendik', label: 'Staf Tenaga Kependidikan', icon: '👥' },
-  ]
 
   return (
     <>
@@ -56,22 +47,11 @@ export default async function ProfilPage() {
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '2rem 1.5rem', display: 'grid', gridTemplateColumns: '240px 1fr', gap: '2rem', alignItems: 'start' }}>
 
-        {/* SIDEBAR */}
-        <aside style={{ position: 'sticky', top: 88, background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', overflow: 'hidden' }}>
-          <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #f3f4f6', fontSize: 12, fontWeight: 600, color: '#6b7280', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Menu Profil</div>
-          {sidebarMenu.map(item => (
-            <a key={item.id} href={`#${item.id}`} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 1.25rem', fontSize: 13.5, color: '#374151', borderBottom: '1px solid #f9fafb', textDecoration: 'none' }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#f9fafb'; e.currentTarget.style.color = '#1B2D6B' }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#374151' }}>
-              <span>{item.icon}</span>
-              {item.label}
-            </a>
-          ))}
-        </aside>
+        {/* SIDEBAR SEKARANG MENGGUNAKAN COMPONENT CLIENT */}
+        <ProfilSidebar />
 
         {/* KONTEN */}
         <main>
-
           {/* IDENTITAS */}
           <section id="identitas" style={{ background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', padding: '2rem', marginBottom: '1.5rem', scrollMarginTop: 100 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 240px', gap: '2rem' }}>
@@ -253,7 +233,6 @@ export default async function ProfilPage() {
               ))}
             </div>
           </section>
-
         </main>
       </div>
 
