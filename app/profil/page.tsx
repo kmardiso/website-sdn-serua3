@@ -34,37 +34,13 @@ export default async function ProfilPage() {
   const tendik = guruList.filter((g: any) => !g.mapel && !g.jabatan?.toLowerCase().includes('guru'))
 
   return (
-    <>
-    <style>{`
-        .profil-layout { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: start; }
-        .profil-sidebar-wrap { display: block; }
-        .identitas-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; }
-        .identitas-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .lokasi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .visi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .struktur-mid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; max-width: 500px; }
-        .struktur-bot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; }
-        .guru-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .ekskul-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 24px; }
-        @media (max-width: 900px) {
-          .profil-layout { grid-template-columns: 1fr !important; }
-          .profil-sidebar-wrap { display: none; }
-        }
-        @media (max-width: 768px) {
-          .identitas-grid { grid-template-columns: 1fr; }
-          .identitas-fields { grid-template-columns: 1fr; }
-          .lokasi-grid { grid-template-columns: 1fr; }
-          .visi-grid { grid-template-columns: 1fr; }
-          .struktur-mid { grid-template-columns: 1fr; max-width: 100%; }
-          .struktur-bot { grid-template-columns: repeat(2, 1fr); }
-          .guru-grid { grid-template-columns: repeat(2, 1fr); }
-          .ekskul-stats { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 480px) {
-          .guru-grid { grid-template-columns: 1fr; }
-        }
-    `}</style>
-      
+     <>
+      <style>{`
+        .ekskul-grid { grid-template-columns: repeat(3, 1fr); }
+         @media (max-width: 768px) { .ekskul-grid { grid-template-columns: 1fr; } }
+     `}</style>
+    
+    <div className="ekskul-grid" style={{ display: 'grid', gap: '1rem' }}></div>
       <Navbar />
 
       <section style={{ background: 'linear-gradient(135deg, #1B2D6B, #2a4090)', padding: '3rem 1.5rem' }}>

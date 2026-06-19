@@ -22,7 +22,7 @@ const kategoriWarna: Record<string, string> = {
 
 export default function EkskulGrid() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+    <div className="ekskul-grid" style={{ display: 'grid', gap: '1rem' }}>
       {ekskulList.map((e, i) => (
         <div
           key={i}
