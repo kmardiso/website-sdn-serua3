@@ -1,6 +1,7 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ProfilSidebar from '@/components/layout/ProfilSidebar'
+import EkskulGrid from '@/components/profil/EkskulGrid'
 
 async function getInfo() {
   try {
@@ -47,10 +48,8 @@ export default async function ProfilPage() {
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '2rem 1.5rem', display: 'grid', gridTemplateColumns: '240px 1fr', gap: '2rem', alignItems: 'start' }}>
 
-        {/* SIDEBAR SEKARANG MENGGUNAKAN COMPONENT CLIENT */}
         <ProfilSidebar />
 
-        {/* KONTEN */}
         <main>
           {/* IDENTITAS */}
           <section id="identitas" style={{ background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', padding: '2rem', marginBottom: '1.5rem', scrollMarginTop: 100 }}>
@@ -213,7 +212,7 @@ export default async function ProfilPage() {
           </section>
 
           {/* TENDIK */}
-          <section id="tendik" style={{ background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', padding: '2rem', scrollMarginTop: 100 }}>
+          <section id="tendik" style={{ background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', padding: '2rem', marginBottom: '1.5rem', scrollMarginTop: 100 }}>
             <h2 style={{ fontWeight: 800, fontSize: '1.5rem', color: '#1B2D6B', marginBottom: 8 }}>Staf Tenaga Kependidikan</h2>
             <p style={{ color: '#6b7280', fontSize: 13.5, marginBottom: 24 }}>Mengenal para profesional yang membantu operasional dan administratif SD Negeri Serua 3.</p>
 
@@ -233,6 +232,33 @@ export default async function ProfilPage() {
               ))}
             </div>
           </section>
+
+          {/* EKSTRAKURIKULER */}
+          <section id="ekskul" style={{ background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', padding: '2rem', scrollMarginTop: 100 }}>
+            <h2 style={{ fontWeight: 800, fontSize: '1.5rem', color: '#1B2D6B', marginBottom: 8 }}>Ekstrakurikuler</h2>
+            <p style={{ color: '#6b7280', fontSize: 13.5, marginBottom: 24 }}>
+              Berbagai kegiatan pengembangan diri untuk mengasah bakat, minat, dan karakter siswa di luar jam pelajaran.
+            </p>
+
+            {/* Stats */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: 24 }}>
+              {[
+                { angka: '9', label: 'Jenis Ekskul' },
+                { angka: '1', label: 'Ekskul Wajib' },
+                { angka: '8', label: 'Ekskul Pilihan' },
+                { angka: '100%', label: 'Siswa Aktif' },
+              ].map((s, i) => (
+                <div key={i} style={{ background: '#f9fafb', borderRadius: 12, padding: '1rem', textAlign: 'center' }}>
+                  <div style={{ fontWeight: 800, fontSize: '1.75rem', color: '#1B2D6B' }}>{s.angka}</div>
+                  <div style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Grid ekskul — client component karena ada hover effect */}
+            <EkskulGrid />
+          </section>
+
         </main>
       </div>
 

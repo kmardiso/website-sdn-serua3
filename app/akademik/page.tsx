@@ -1,16 +1,105 @@
+'use client'
+
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
+import { useState } from 'react'
 
-export const dynamic = 'force-dynamic'
+// Data kalender akademik per semester
+const kalenderData: Record<string, { tanggal: string; kegiatan: string; warna: string; bulan: number }[]> = {
+  'Semester 1': [
+    { tanggal: '15 Jul', kegiatan: 'Hari Pertama Masuk Sekolah', warna: '#1B2D6B', bulan: 7 },
+    { tanggal: '17 Agu', kegiatan: 'HUT Kemerdekaan RI', warna: '#ef4444', bulan: 8 },
+    { tanggal: '2 Sep', kegiatan: 'Rapat Komite Sekolah', warna: '#C8A84B', bulan: 9 },
+    { tanggal: '14 Okt', kegiatan: 'Penilaian Tengah Semester 1', warna: '#8b5cf6', bulan: 10 },
+    { tanggal: '25 Nov', kegiatan: 'Hari Guru Nasional', warna: '#10b981', bulan: 11 },
+    { tanggal: '9 Des', kegiatan: 'Penilaian Akhir Semester 1', warna: '#f59e0b', bulan: 12 },
+    { tanggal: '20 Des', kegiatan: 'Pembagian Rapor Semester 1', warna: '#1B2D6B', bulan: 12 },
+    { tanggal: '23 Des', kegiatan: 'Libur Semester 1', warna: '#6b7280', bulan: 12 },
+  ],
+  'Semester 2': [
+    { tanggal: '6 Jan', kegiatan: 'Hari Pertama Semester 2', warna: '#1B2D6B', bulan: 1 },
+    { tanggal: '4 Feb', kegiatan: 'Isra Miraj Nabi Muhammad', warna: '#10b981', bulan: 2 },
+    { tanggal: '10 Mar', kegiatan: 'Penilaian Tengah Semester 2', warna: '#8b5cf6', bulan: 3 },
+    { tanggal: '18 Apr', kegiatan: 'Ujian Akhir Kelas 6', warna: '#ef4444', bulan: 4 },
+    { tanggal: '2 Mei', kegiatan: 'Hari Pendidikan Nasional', warna: '#C8A84B', bulan: 5 },
+    { tanggal: '2 Jun', kegiatan: 'Penilaian Akhir Semester 2', warna: '#f59e0b', bulan: 6 },
+    { tanggal: '20 Jun', kegiatan: 'Pembagian Rapor Semester 2', warna: '#1B2D6B', bulan: 6 },
+    { tanggal: '24 Jun', kegiatan: 'Libur Kenaikan Kelas', warna: '#6b7280', bulan: 6 },
+  ],
+  'Hari Normal': [
+    { tanggal: 'Senin', kegiatan: 'Upacara Bendera', warna: '#1B2D6B', bulan: 0 },
+    { tanggal: 'Selasa', kegiatan: 'Kegiatan Literasi Pagi', warna: '#C8A84B', bulan: 0 },
+    { tanggal: 'Rabu', kegiatan: 'Ekstrakurikuler Pramuka', warna: '#10b981', bulan: 0 },
+    { tanggal: 'Kamis', kegiatan: 'Bimbingan Konseling', warna: '#8b5cf6', bulan: 0 },
+    { tanggal: 'Jumat', kegiatan: 'Senam Pagi Bersama', warna: '#f59e0b', bulan: 0 },
+  ],
+}
+
+const BULAN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+const HARI = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
+
+// Tanggal merah nasional (bulan 0-indexed)
+const HARI_MERAH: Record<string, number[]> = {
+  '0': [1], '1': [], '2': [29], '3': [], '4': [1], '5': [],
+  '6': [], '7': [17], '8': [], '9': [], '10': [], '11': [25],
+}
 
 export default function AkademikPage() {
+  const now = new Date()
+  const [currentMonth, setCurrentMonth] = useState(now.getMonth())
+  const [currentYear, setCurrentYear] = useState(now.getFullYear())
+  const [selectedSemester, setSelectedSemester] = useState('Semester 1')
+  const [selectedDay, setSelectedDay] = useState<number | null>(now.getDate())
+
+  const prevMonth = () => {
+    if (currentMonth === 0) { setCurrentMonth(11); setCurrentYear(y => y - 1) }
+    else setCurrentMonth(m => m - 1)
+    setSelectedDay(null)
+  }
+
+  const nextMonth = () => {
+    if (currentMonth === 11) { setCurrentMonth(0); setCurrentYear(y => y + 1) }
+    else setCurrentMonth(m => m + 1)
+    setSelectedDay(null)
+  }
+
+  // Hitung hari pertama bulan ini jatuh di hari apa
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay()
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
+
+  // Event di bulan ini berdasarkan semester yang dipilih
+  const eventsBulanIni = kalenderData[selectedSemester].filter(e => {
+    if (selectedSemester === 'Hari Normal') return true
+    return e.bulan === currentMonth + 1
+  })
+
+  // Event di tanggal yang dipilih
+  const selectedEvents = selectedDay
+    ? kalenderData[selectedSemester].filter(e => {
+        const dayNum = parseInt(e.tanggal.split(' ')[0])
+        return dayNum === selectedDay && (selectedSemester === 'Hari Normal' || e.bulan === currentMonth + 1)
+      })
+    : []
+
+  // Tanggal yang punya event
+  const eventDays = new Set(
+    kalenderData[selectedSemester]
+      .filter(e => selectedSemester === 'Hari Normal' || e.bulan === currentMonth + 1)
+      .map(e => parseInt(e.tanggal.split(' ')[0]))
+      .filter(n => !isNaN(n))
+  )
+
+  const hariMerahBulan = HARI_MERAH[String(currentMonth)] || []
+  const isToday = (day: number) =>
+    day === now.getDate() && currentMonth === now.getMonth() && currentYear === now.getFullYear()
+
   return (
     <>
       <Navbar />
 
       {/* HERO */}
-      <section style={{ background: 'linear-gradient(135deg, #1B2D6B, #2a4090)', padding: '3rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: 'linear-gradient(135deg, #1B2D6B, #2a4090)', padding: '3rem 1.5rem', overflow: 'hidden' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center' }}>
           <div>
             <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', marginBottom: 8 }}>Beranda &rsaquo; Akademik</div>
@@ -26,8 +115,8 @@ export default function AkademikPage() {
               Kami menerapkan kurikulum inovatif yang berpusat pada pengembangan karakter, kreativitas, dan kompetensi siswa.
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
-              <Link href="/kontak" style={{ background: '#C8A84B', color: '#1B2D6B', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 10 }}>Daftar Sekarang</Link>
-              <Link href="/profil" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 600, fontSize: 14, padding: '12px 24px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.2)' }}>Pelajari Lebih Lanjut</Link>
+              <Link href="/kontak" style={{ background: '#C8A84B', color: '#1B2D6B', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 10, textDecoration: 'none' }}>Daftar Sekarang</Link>
+              <Link href="/profil" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 600, fontSize: 14, padding: '12px 24px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.2)', textDecoration: 'none' }}>Pelajari Lebih Lanjut</Link>
             </div>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.2)' }}>
@@ -48,7 +137,7 @@ export default function AkademikPage() {
             {[
               { icon: '🎯', title: 'Pembelajaran Berdiferensiasi', desc: 'Setiap siswa mendapatkan pendekatan belajar yang disesuaikan dengan kebutuhan, bakat, dan minat mereka.' },
               { icon: '🤝', title: 'Projek Profil Pancasila', desc: 'Pengembangan karakter melalui projek nyata yang mencerminkan nilai-nilai Pancasila dalam kehidupan sehari-hari.' },
-              { icon: '💡', title: 'Pembelajaran Berdiferensiasi', desc: 'Asesmen yang berfokus pada pertumbuhan dan perkembangan siswa, bukan hanya hasil akhir semata.' },
+              { icon: '💡', title: 'Asesmen Autentik', desc: 'Asesmen yang berfokus pada pertumbuhan dan perkembangan siswa, bukan hanya hasil akhir semata.' },
             ].map((p, i) => (
               <div key={i} style={{ background: '#f9fafb', borderRadius: 16, padding: '2rem', textAlign: 'center' }}>
                 <div style={{ fontSize: 40, marginBottom: 16 }}>{p.icon}</div>
@@ -60,62 +149,152 @@ export default function AkademikPage() {
         </div>
       </section>
 
-      {/* KALENDER AKADEMIK */}
+      {/* KALENDER AKADEMIK - INTERAKTIF */}
       <section style={{ padding: '4rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: 12 }}>
             <div>
               <div style={{ fontSize: 12, fontWeight: 600, color: '#C8A84B', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>JADWAL KEGIATAN</div>
-              <h2 style={{ fontWeight: 800, fontSize: '1.75rem', color: '#1B2D6B' }}>Kalender Akademik 2024/2025</h2>
+              <h2 style={{ fontWeight: 800, fontSize: '1.75rem', color: '#1B2D6B' }}>Kalender Akademik 2026/2027</h2>
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
               {['Semester 1', 'Semester 2', 'Hari Normal'].map(t => (
-                <button key={t} style={{ padding: '8px 16px', borderRadius: 8, border: '1px solid #e5e7eb', background: '#fff', color: '#374151', fontSize: 13, cursor: 'pointer' }}>{t}</button>
+                <button
+                  key={t}
+                  onClick={() => { setSelectedSemester(t); setSelectedDay(null) }}
+                  style={{
+                    padding: '8px 16px', borderRadius: 8, fontSize: 13, cursor: 'pointer',
+                    fontWeight: selectedSemester === t ? 700 : 400,
+                    border: selectedSemester === t ? '2px solid #1B2D6B' : '1px solid #e5e7eb',
+                    background: selectedSemester === t ? '#1B2D6B' : '#fff',
+                    color: selectedSemester === t ? '#fff' : '#374151',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {t}
+                </button>
               ))}
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '2rem' }}>
             {/* KALENDER */}
             <div style={{ background: '#fff', borderRadius: 16, padding: '1.5rem', border: '1px solid #e5e7eb' }}>
+              {/* Header navigasi bulan */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                <button style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#374151' }}>←</button>
-                <div style={{ fontWeight: 700, fontSize: 16, color: '#1B2D6B' }}>Januari 2024</div>
-                <button style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#374151' }}>→</button>
+                <button
+                  onClick={prevMonth}
+                  style={{ background: '#f3f4f6', border: 'none', fontSize: 18, cursor: 'pointer', color: '#374151', width: 36, height: 36, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  ←
+                </button>
+                <div style={{ fontWeight: 700, fontSize: 16, color: '#1B2D6B' }}>
+                  {BULAN[currentMonth]} {currentYear}
+                </div>
+                <button
+                  onClick={nextMonth}
+                  style={{ background: '#f3f4f6', border: 'none', fontSize: 18, cursor: 'pointer', color: '#374151', width: 36, height: 36, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  →
+                </button>
               </div>
+
+              {/* Grid hari */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, textAlign: 'center' }}>
-                {['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'].map(d => (
+                {HARI.map(d => (
                   <div key={d} style={{ fontSize: 12, fontWeight: 600, color: '#9ca3af', padding: '8px 0' }}>{d}</div>
                 ))}
-                {[...Array(31)].map((_, i) => (
-                  <div key={i} style={{
-                    padding: '8px 0', fontSize: 13, borderRadius: 8,
-                    background: i + 1 === 4 ? '#1B2D6B' : 'transparent',
-                    color: i + 1 === 4 ? '#fff' : i % 7 === 0 ? '#ef4444' : '#374151',
-                    cursor: 'pointer', fontWeight: i + 1 === 4 ? 700 : 400,
-                  }}>
-                    {i + 1}
-                  </div>
+
+                {/* Kosong sebelum hari pertama */}
+                {Array.from({ length: firstDay }).map((_, i) => (
+                  <div key={`empty-${i}`} />
                 ))}
+
+                {/* Hari-hari */}
+                {Array.from({ length: daysInMonth }).map((_, i) => {
+                  const day = i + 1
+                  const isSelected = day === selectedDay
+                  const hasEvent = eventDays.has(day)
+                  const isMerah = hariMerahBulan.includes(day)
+                  const isTodayDay = isToday(day)
+                  const isSunday = (firstDay + i) % 7 === 0
+
+                  return (
+                    <div
+                      key={day}
+                      onClick={() => setSelectedDay(day === selectedDay ? null : day)}
+                      style={{
+                        padding: '8px 0',
+                        fontSize: 13,
+                        borderRadius: 8,
+                        background: isSelected ? '#1B2D6B' : isTodayDay ? '#eef2fc' : 'transparent',
+                        color: isSelected ? '#fff' : isMerah || isSunday ? '#ef4444' : '#374151',
+                        cursor: 'pointer',
+                        fontWeight: isSelected || isTodayDay ? 700 : 400,
+                        position: 'relative',
+                        border: isTodayDay && !isSelected ? '2px solid #1B2D6B' : '2px solid transparent',
+                        transition: 'all 0.15s',
+                      }}
+                    >
+                      {day}
+                      {hasEvent && !isSelected && (
+                        <span style={{
+                          position: 'absolute', bottom: 2, left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: 4, height: 4, borderRadius: '50%',
+                          background: '#C8A84B', display: 'block',
+                        }} />
+                      )}
+                    </div>
+                  )
+                })}
               </div>
+
+              {/* Detail hari yang dipilih */}
+              {selectedDay && selectedEvents.length > 0 && (
+                <div style={{ marginTop: 16, padding: '12px 14px', background: '#f9fafb', borderRadius: 10, borderLeft: '3px solid #1B2D6B' }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: '#6b7280', marginBottom: 8 }}>
+                    Kegiatan {selectedDay} {BULAN[currentMonth]}:
+                  </div>
+                  {selectedEvents.map((e, i) => (
+                    <div key={i} style={{ fontSize: 13.5, color: '#1B2D6B', fontWeight: 600 }}>{e.kegiatan}</div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* AGENDA */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 4 }}>Kegiatan Bulan Ini</div>
-              {[
-                { tanggal: '4 Jan', kegiatan: 'Rapat Komite Sekolah', warna: '#1B2D6B' },
-                { tanggal: '8 Jan', kegiatan: 'UKT Semester Ganjil', warna: '#C8A84B' },
-                { tanggal: '15 Jan', kegiatan: 'Peringatan HUT Sekolah', warna: '#10b981' },
-                { tanggal: '22 Jan', kegiatan: 'Penerimaan Rapor', warna: '#8b5cf6' },
-              ].map(a => (
-                <div key={a.tanggal} style={{ background: '#fff', borderRadius: 10, padding: '12px 14px', border: '1px solid #e5e7eb', display: 'flex', gap: 12, alignItems: 'center' }}>
-                  <div style={{ width: 44, height: 44, background: a.warna, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#fff', flexShrink: 0, textAlign: 'center', lineHeight: 1.3 }}>
-                    {a.tanggal.split(' ')[0]}<br />{a.tanggal.split(' ')[1]}
+              <div style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 4 }}>
+                {selectedSemester === 'Hari Normal' ? 'Jadwal Rutin' : `Agenda ${BULAN[currentMonth]}`}
+              </div>
+              {eventsBulanIni.length > 0 ? eventsBulanIni.map((a, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: '#fff', borderRadius: 10, padding: '12px 14px',
+                    border: '1px solid #e5e7eb', display: 'flex', gap: 12, alignItems: 'center',
+                    cursor: 'pointer',
+                    transition: 'border-color 0.2s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = '#1B2D6B')}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = '#e5e7eb')}
+                >
+                  <div style={{
+                    width: 44, height: 44, background: a.warna, borderRadius: 10,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 11, fontWeight: 700, color: '#fff', flexShrink: 0,
+                    textAlign: 'center', lineHeight: 1.3,
+                  }}>
+                    {a.tanggal.split(' ')[0]}<br />{a.tanggal.split(' ')[1] || ''}
                   </div>
                   <div style={{ fontSize: 13.5, fontWeight: 500, color: '#374151' }}>{a.kegiatan}</div>
                 </div>
-              ))}
+              )) : (
+                <div style={{ color: '#9ca3af', fontSize: 13, textAlign: 'center', padding: '2rem 0' }}>
+                  Tidak ada kegiatan di bulan ini
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -159,8 +338,8 @@ export default function AkademikPage() {
           <h2 style={{ fontWeight: 800, fontSize: '1.75rem', color: '#fff', marginBottom: 16 }}>Siap Menjadi Bagian dari Keluarga SD Negeri Serua 3?</h2>
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, marginBottom: 28 }}>Bergabunglah bersama ribuan siswa berprestasi yang telah merasakan kualitas pendidikan terbaik.</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
-            <Link href="/kontak" style={{ background: '#C8A84B', color: '#1B2D6B', fontWeight: 700, fontSize: 14, padding: '13px 28px', borderRadius: 10 }}>Gabung Sekarang</Link>
-            <Link href="/profil" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 600, fontSize: 14, padding: '13px 28px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.2)' }}>Pelajari Lebih Lanjut</Link>
+            <Link href="/kontak" style={{ background: '#C8A84B', color: '#1B2D6B', fontWeight: 700, fontSize: 14, padding: '13px 28px', borderRadius: 10, textDecoration: 'none' }}>Gabung Sekarang</Link>
+            <Link href="/profil" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 600, fontSize: 14, padding: '13px 28px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.2)', textDecoration: 'none' }}>Pelajari Lebih Lanjut</Link>
           </div>
         </div>
       </section>

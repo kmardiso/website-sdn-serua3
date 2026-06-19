@@ -9,6 +9,7 @@ export default function ProfilSidebar() {
     { id: 'struktur', label: 'Struktur Organisasi', icon: '📊' },
     { id: 'guru', label: 'Staf Pengajar', icon: '👨‍🏫' },
     { id: 'tendik', label: 'Staf Tenaga Kependidikan', icon: '👥' },
+    { id: 'ekskul', label: 'Ekstrakurikuler', icon: '⚜️' },
   ];
 
   return (
@@ -17,9 +18,9 @@ export default function ProfilSidebar() {
         Menu Profil
       </div>
       {sidebarMenu.map(item => (
-        <a 
-          key={item.id} 
-          href={`#${item.id}`} 
+        <a
+          key={item.id}
+          href={`#${item.id}`}
           style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 1.25rem', fontSize: 13.5, color: '#374151', borderBottom: '1px solid #f9fafb', textDecoration: 'none' }}
           onMouseEnter={e => { e.currentTarget.style.background = '#f9fafb'; e.currentTarget.style.color = '#1B2D6B' }}
           onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#374151' }}

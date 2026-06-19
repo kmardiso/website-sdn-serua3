@@ -9,6 +9,7 @@ const profilMenu = [
   { label: 'Struktur Organisasi', href: '/profil#struktur' },
   { label: 'Staf Pengajar', href: '/profil#guru' },
   { label: 'Staf Tenaga Kependidikan', href: '/profil#tendik' },
+  { label: 'Eksrakurikuler', href: '/profil#ekskul'},
 ]
 
 export default function Navbar() {
@@ -41,13 +42,17 @@ export default function Navbar() {
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 68 }}>
 
         {/* LOGO */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 40, height: 40, background: 'linear-gradient(135deg, #1B2D6B, #2a4090)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C8A84B', fontWeight: 800, fontSize: 14 }}>SD</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <img
+            src="/Logo.png"
+            alt="logo"
+            style={{ height: 40, width: 40, objectFit: 'contain', borderRadius: 8 }}
+          />
           <div>
-            <div style={{ fontWeight: 700, fontSize: 14, color: '#1B2D6B', lineHeight: 1.2 }}>SD Negeri Serua 3</div>
-            <div style={{ fontSize: 11, color: '#6b7280' }}>Tangerang Selatan</div>
+            <div style={{ fontWeight: 700, fontSize: 14, color:'#1B2D6B', lineHeight: 1.2 }}>SD Negeri Serua 3 Depok</div>
+            <div style={{ fontSize: 11, color: '#010101' }}>Tangerang Selatan</div>
           </div>
-        </Link>
+        </div>
 
         {/* DESKTOP MENU */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
