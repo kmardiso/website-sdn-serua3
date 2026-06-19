@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     // Coba Vercel Blob kalau ada token-nya
     if (process.env.BLOB_READ_WRITE_TOKEN) {
-      const { put } = await import('vercel-blob')
+      const { put } = await import('@vercel/blob')
       const filename = `berita/${Date.now()}-${file.name.replace(/\s+/g, '-')}`
       const blob = await put(filename, file, { access: 'public' })
       return Response.json({ url: blob.url })
