@@ -124,7 +124,7 @@ export default async function ProfilPage() {
                 <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: '#1B2D6B', marginBottom: 16 }}>📍 Lokasi & Kontak</h3>
                 <div className="lokasi-grid">
                   {[
-                    { icon: '📍', label: 'Alamat Lengkap', value: info.alamat || 'Jl. Serua Raya, Serua, Kec. Bojongsari, Kota Depok, Jawa Barat 16523.' },
+                    { icon: '📍', label: 'Alamat Lengkap', value: <info className="alamat">Jl. Serua Raya, Serua, Kec. Bojongsari, Kota Depok, Jawa Barat 16523, Indonesia.</info> },
                     { icon: '✉️', label: 'Email Resmi', value: info.email || 'info@sdnserua3.sch.id' },
                     { icon: '📞', label: 'Telepon & WhatsApp', value: info.telepon || '(021) 7463-XXXX' },
                     { icon: '🕐', label: 'Jam Operasional', value: info.jam_operasional || 'Senin - Jumat: 07.00 – 15.00' },
