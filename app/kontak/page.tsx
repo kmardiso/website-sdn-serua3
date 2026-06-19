@@ -124,9 +124,9 @@ export default function KontakPage() {
 
         <div style={{ marginTop: '3rem', background: '#EEF2FF', borderRadius: 16, height: 260, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12 }}>
           <div style={{ width: 56, height: 56, background: '#1B2D6B', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>📍</div>
-          <div style={{ fontWeight: 600, fontSize: 14, color: '#1B2D6B' }}>SD Negeri Serua 3</div>
-          <div style={{ fontSize: 13, color: '#6b7280', textAlign: 'center', padding: '0 1rem' }}>Jl. Serua Raya No. 3, Ciputat, Tangerang Selatan</div>
-          <a href="https://maps.google.com" target="_blank" style={{ background: '#1B2D6B', color: '#fff', padding: '8px 20px', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>Lihat di Google Maps ↗</a>
+          <div style={{ fontWeight: 600, fontSize: 14, color: '#1B2D6B' }}>SD Negeri Serua 3 Depok</div>
+          <div style={{ fontSize: 13, color: '#6b7280', textAlign: 'center', padding: '0 1rem' }}>Jl. Serua Raya, Serua, Kec. Bojongsari, Kota Depok, Jawa Barat 16523.</div>
+          <a href="https://www.google.com/maps/place/Serua+State+Elementary+School+03/@-6.3669119,106.7321748,3a,75y,249.02h,69.6t/data=!3m7!1e1!3m5!1sM_EpR9lmX7GJfNVtRz-BLA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D20.3960312376027%26panoid%3DM_EpR9lmX7GJfNVtRz-BLA%26yaw%3D249.0227186730117!7i16384!8i8192!4m6!3m5!1s0x2e69ef5c59af565d:0xbe8af972f88497a0!8m2!3d-6.3670115!4d106.7321926!16s%2Fg%2F1hm5fzdk5?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" style={{ background: '#1B2D6B', color: '#fff', padding: '8px 20px', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>Lihat di Google Maps ↗</a>
         </div>
       </div>
 
