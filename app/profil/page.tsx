@@ -35,10 +35,35 @@ export default async function ProfilPage() {
 
   return (
      <>
-      <style>{`
-        .ekskul-grid { grid-template-columns: repeat(3, 1fr); }
-         @media (max-width: 768px) { .ekskul-grid { grid-template-columns: 1fr; } }
-     `}</style>
+     <style>{`
+        .profil-layout { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: start; }
+        .profil-sidebar-wrap { display: block; }
+        .identitas-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; }
+        .identitas-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .lokasi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .visi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .struktur-mid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; max-width: 500px; }
+        .struktur-bot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; }
+        .guru-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .ekskul-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 24px; }
+        @media (max-width: 900px) {
+          .profil-layout { grid-template-columns: 1fr !important; }
+          .profil-sidebar-wrap { display: none; }
+        }
+        @media (max-width: 768px) {
+          .identitas-grid { grid-template-columns: 1fr; }
+          .identitas-fields { grid-template-columns: 1fr; }
+          .lokasi-grid { grid-template-columns: 1fr; }
+          .visi-grid { grid-template-columns: 1fr; }
+          .struktur-mid { grid-template-columns: 1fr; max-width: 100%; }
+          .struktur-bot { grid-template-columns: repeat(2, 1fr); }
+          .guru-grid { grid-template-columns: repeat(2, 1fr); }
+          .ekskul-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+          .guru-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
     
     <div className="ekskul-grid" style={{ display: 'grid', gap: '1rem' }}></div>
       <Navbar />
@@ -47,7 +72,7 @@ export default async function ProfilPage() {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', marginBottom: 8 }}>Beranda &rsaquo; Profil</div>
           <h1 style={{ fontWeight: 800, fontSize: '2rem', color: '#fff' }}>Profil Sekolah</h1>
-          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14, marginTop: 8 }}>Informasi resmi mengenai identitas dan data administratif SD Negeri Serua 3</p>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14, marginTop: 8 }}>Informasi resmi mengenai identitas dan data administratif SD Negeri Serua 3 Depok</p>
         </div>
       </section>
 
@@ -63,10 +88,10 @@ export default async function ProfilPage() {
               <div className="identitas-grid">
                 <div>
                   <h2 style={{ fontWeight: 800, fontSize: '1.5rem', color: '#1B2D6B', marginBottom: 24 }}>Identitas Sekolah</h2>
-                  <p style={{ color: '#6b7280', fontSize: 13.5, marginBottom: 24 }}>Informasi resmi mengenai identitas dan data administratif SD Negeri Serua 3.</p>
+                  <p style={{ color: '#6b7280', fontSize: 13.5, marginBottom: 24 }}>Informasi resmi mengenai identitas dan data administratif SD Negeri Serua 3 Depok.</p>
                   <div className="identitas-fields">
                     {[
-                      ['NAMA SEKOLAH', info.nama_sekolah || 'SD NEGERI SERUA 3'],
+                      ['NAMA SEKOLAH', info.nama_sekolah || 'SD Negeri Serua 3 depok'],
                       ['NPSN', info.npsn || '20613589'],
                       ['NSS', '101036002003'],
                       ['BENTUK PENDIDIKAN', 'Sekolah Dasar (SD)'],
@@ -99,7 +124,7 @@ export default async function ProfilPage() {
                 <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: '#1B2D6B', marginBottom: 16 }}>📍 Lokasi & Kontak</h3>
                 <div className="lokasi-grid">
                   {[
-                    { icon: '📍', label: 'Alamat Lengkap', value: info.alamat || 'Jl. Serua Raya No. 3, Kelurahan Serua, Kecamatan Ciputat, Kota Tangerang Selatan, Banten 15414' },
+                    { icon: '📍', label: 'Alamat Lengkap', value: info.alamat || 'Jl. Serua Raya, Serua, Kec. Bojongsari, Kota Depok, Jawa Barat 16523.' },
                     { icon: '✉️', label: 'Email Resmi', value: info.email || 'info@sdnserua3.sch.id' },
                     { icon: '📞', label: 'Telepon & WhatsApp', value: info.telepon || '(021) 7463-XXXX' },
                     { icon: '🕐', label: 'Jam Operasional', value: info.jam_operasional || 'Senin - Jumat: 07.00 – 15.00' },

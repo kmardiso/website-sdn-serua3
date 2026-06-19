@@ -22,8 +22,8 @@ export default function Footer() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <img src="/Logo.png" alt="Logo" style={{ width: 40, height: 40, objectFit: 'contain', borderRadius: 8 }} />
               <div>
-                <div style={{ fontWeight: 700, fontSize: 14 }}>SD Negeri Serua 3</div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>Tangerang Selatan</div>
+                <div style={{ fontWeight: 700, fontSize: 14 }}>SD Negeri Serua 3 Depok</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>Bonjong Sari</div>
               </div>
             </div>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: 260 }}>
@@ -48,14 +48,14 @@ export default function Footer() {
           <div>
             <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 16, color: '#C8A84B' }}>HUBUNGI KAMI</div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>
-              <p>Jl. Serua Raya No. 3, Serua, Kec. Ciputat, Kota Tangerang Selatan, Banten 15414</p>
+              <p>Jl. Serua Raya, Serua, Kec. Bojongsari, Kota Depok, Jawa Barat 16523.</p>
               <p style={{ marginTop: 8 }}>(021) 7463-XXXX</p>
             </div>
           </div>
         </div>
 
         <div className="footer-bottom" style={{ paddingTop: '1.5rem', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>
-          <span>© {new Date().getFullYear()} SD Negeri Serua 3. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SD Negeri Serua 3 . All rights reserved.</span>
           <span>NPSN 20604893</span>
         </div>
       </div>

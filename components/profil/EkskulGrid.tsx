@@ -22,8 +22,14 @@ const kategoriWarna: Record<string, string> = {
 
 export default function EkskulGrid() {
   return (
-    <div className="ekskul-grid" style={{ display: 'grid', gap: '1rem' }}>
-      {ekskulList.map((e, i) => (
+    <>
+      <style>{`
+        .ekskul-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        @media (max-width: 768px) { .ekskul-grid { grid-template-columns: 1fr; } }
+        @media (min-width: 480px) and (max-width: 768px) { .ekskul-grid { grid-template-columns: repeat(2, 1fr); } }
+      `}</style>
+      <div className="ekskul-grid">
+        {ekskulList.map((e, i) => (
         <div
           key={i}
           style={{
@@ -69,5 +75,5 @@ export default function EkskulGrid() {
         </div>
       ))}
     </div>
-  )
-}
+    </>
+)}

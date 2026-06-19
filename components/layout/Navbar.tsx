@@ -65,8 +65,8 @@ export default function Navbar() {
               style={{ height: 40, width: 40, objectFit: 'contain', borderRadius: 8 }}
             />
             <div>
-              <div style={{ fontWeight: 700, fontSize: 14, color: '#1B2D6B', lineHeight: 1.2 }}>SD Negeri Serua 3</div>
-              <div style={{ fontSize: 11, color: '#6b7280' }}>Tangerang Selatan</div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: '#1B2D6B', lineHeight: 1.2 }}>SD Negeri Serua 3 Depok</div>
+              <div style={{ fontSize: 11, color: '#6b7280' }}>Bonjong Sari</div>
             </div>
           </Link>
 
