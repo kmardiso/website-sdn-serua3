@@ -19,9 +19,6 @@ async function getGuru() {
   } catch { return [] }
 }
 
-const fotoGuru = [
-]
-
 export default async function ProfilPage() {
   const [info, guruList] = await Promise.all([getInfo(), getGuru()])
   const pengajar = guruList.filter((g: any) => g.mapel || g.jabatan?.toLowerCase().includes('guru'))
