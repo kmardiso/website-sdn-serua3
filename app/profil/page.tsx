@@ -20,12 +20,6 @@ async function getGuru() {
 }
 
 const fotoGuru = [
-  'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=100&q=10',
-  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=10',
-  'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=100&q=10',
-  'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=10',
-  'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=10',
-  'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=100&q=10',
 ]
 
 export default async function ProfilPage() {
@@ -205,18 +199,18 @@ export default async function ProfilPage() {
               <h2 style={{ fontWeight: 800, fontSize: '1.5rem', color: '#1B2D6B', marginBottom: 8 }}>Staf Pengajar</h2>
               <p style={{ color: '#6b7280', fontSize: 13.5, marginBottom: 24 }}>Para profesional yang membimbing dan menginspirasi generasi muda di SD Negeri Serua 3.</p>
               <div className="guru-grid">
-                {(pengajar.length > 0 ? pengajar : ['Hj. Siti Aminah, M.Pd', 'Budi Santoso, S.Pd', 'Larasati Putri, S.Pd', 'Andi Wijaya, S.Pd', 'Pandung Slamet, S.Pd', 'Siska Rini, S.Pd'].map((nama, i) => ({ nama, jabatan: `Guru Kelas ${i + 1}`, foto: fotoGuru[i], id: i }))).map((g: any, i: number) => (
-                  <div key={g.id || i} style={{ background: '#f9fafb', borderRadius: 12, padding: '1.25rem', display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <img src={g.foto || fotoGuru[i % fotoGuru.length]} alt={g.nama} style={{ width: 50, height: 50, borderRadius: '50%', objectFit: 'cover', border: '2px solid #e5e7eb', flexShrink: 0 }} />
+                {(pengajar.length > 0 ? pengajar : ['Hj. Siti Aminah, M.Pd', 'Budi Santoso, S.Pd', 'Larasati Putri, S.Pd', 'Andi Wijaya, S.Pd', 'Pandung Slamet, S.Pd', 'Siska Rini, S.Pd'].map((nama, i) => ({ nama, jabatan: `Guru Kelas ${i + 1}`, foto:[i], id: i }))).map((g: any, i: number) => (
+                 <div key={i} style={{ background: '#f9fafb', borderRadius: 12, padding: '1.25rem', display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{ width: 50, height: 50, background: '#EEF2FF', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>👤</div>
                     <div>
                       <div style={{ fontWeight: 700, fontSize: 13.5, color: '#1B2D6B' }}>{g.nama}</div>
                       <div style={{ fontSize: 12, color: '#6b7280' }}>{g.jabatan}</div>
-                      {g.mapel && <div style={{ fontSize: 11, color: '#9ca3af' }}>{g.mapel}</div>}
                     </div>
                   </div>
                 ))}
               </div>
             </section>
+
 
             {/* TENDIK */}
             <section id="tendik" style={{ background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb', padding: '2rem', marginBottom: '1.5rem', scrollMarginTop: 100 }}>
