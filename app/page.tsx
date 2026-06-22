@@ -6,9 +6,10 @@ import Footer from '@/components/layout/Footer'
 import { useEffect, useState } from 'react'
 
 const fotoSekolah = [
-  'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500&q=30',
+  'https://i.ibb.co.com/nNM0x0Rf/Whats-App-Image-2026-06-15-at-1-14-35-PM-1.jpg',
   'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=30',
   'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&q=30',
+  'https://i.ibb.co.com/gMyZtQTB/Whats-App-Image-2026-06-15-at-1-14-37-PM.jpg',
 ]
 
 export default function HomePage() {
@@ -169,7 +170,7 @@ export default function HomePage() {
             {[
               { icon: '🖥️', title: 'Laboratorium Digital', desc: 'Dilengkapi 40 unit komputer terbaru dengan koneksi internet cepat.', img: fotoSekolah[1] },
               { icon: '📚', title: 'Library Hub', desc: 'Perpustakaan modern dengan koleksi 5.000+ buku fisik dan akses digital.', img: fotoSekolah[2] },
-              { icon: '⚽', title: 'Fasilitas Olahraga', desc: 'Lapangan serbaguna dan ruang olahraga indoor untuk perkembangan fisik siswa.', img: fotoSekolah[0] },
+              { icon: '⚽', title: 'Fasilitas Olahraga', desc: 'Lapangan serbaguna dan ruang olahraga indoor untuk perkembangan fisik siswa.', img: fotoSekolah[3] },
             ].map((f, i) => (
               <div key={i} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
                 <div style={{ height: 180, overflow: 'hidden' }}>
