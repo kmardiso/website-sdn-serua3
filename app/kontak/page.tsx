@@ -46,9 +46,9 @@ export default function KontakPage() {
             </div>
             <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 16, padding: '1.5rem' }}>
               <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', marginBottom: 16, fontWeight: 500 }}>Kirim Pesan Cepat</div>
-              <input style={{ ...inputStyle, marginBottom: 10, background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }} placeholder="Nama lengkap Anda" value={form.nama} onChange={e => setForm(f => ({ ...f, nama: e.target.value }))} />
-              <input style={{ ...inputStyle, marginBottom: 10, background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }} placeholder="Alamat email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
-              <textarea style={{ ...inputStyle, height: 80, resize: 'none', background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', marginBottom: 10 }} placeholder="Pesan Anda..." value={form.pesan} onChange={e => setForm(f => ({ ...f, pesan: e.target.value }))} />
+              <input style={{ ...inputStyle, marginBottom: 10, background: 'rgb(255, 255, 255)', border: '1px solid rgba(255,255,255,0.2)', color: '#000000' }} placeholder="Nama lengkap Anda" value={form.nama} onChange={e => setForm(f => ({ ...f, nama: e.target.value }))} />
+              <input style={{ ...inputStyle, marginBottom: 10, background: 'rgb(255, 255, 255)', border: '1px solid rgba(255,255,255,0.2)', color: '#000000' }} placeholder="Alamat email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+              <textarea style={{ ...inputStyle, height: 80, resize: 'none', background: 'rgb(255, 255, 255)', border: '1px solid rgba(255,255,255,0.2)', color: '#000000', marginBottom: 10 }} placeholder="Pesan Anda..." value={form.pesan} onChange={e => setForm(f => ({ ...f, pesan: e.target.value }))} />
               <button onClick={handleSubmit} disabled={status === 'loading'} style={{ width: '100%', background: '#C8A84B', color: '#1B2D6B', fontWeight: 700, fontSize: 14, padding: '12px', borderRadius: 10, border: 'none', cursor: 'pointer' }}>
                 {status === 'loading' ? 'Mengirim...' : 'Kirim Pesan Sekarang'}
               </button>
@@ -65,7 +65,7 @@ export default function KontakPage() {
             <p style={{ color: '#6b7280', fontSize: 13.5, marginBottom: '2rem' }}>Kunjungi kantor administrasi kami atau hubungi kami melalui kanal komunikasi resmi.</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
-                { icon: '📍', label: 'Alamat Sekolah', value: 'Jl. Serua Raya No. 3, Kelurahan Serua, Kecamatan Ciputat, Kota Tangerang Selatan, Banten 15414', color: '#1B2D6B' },
+                { icon: '📍', label: 'Alamat Sekolah', value: 'Jl. Serua Raya, Serua, Kec. Bojongsari, Kota Depok, Jawa Barat 16523', color: '#1B2D6B' },
                 { icon: '📞', label: 'Telepon & WhatsApp', value: '(021) 7463-XXXX\n+62 812-XXXX-XXXX', color: '#10b981' },
                 { icon: '✉️', label: 'Email Resmi', value: 'info@sdnserua3.sch.id', color: '#8b5cf6' },
                 { icon: '🕐', label: 'Jam Operasional', value: 'Senin - Jumat: 07.00 – 15.00\nSabtu - Minggu: Libur', color: '#C8A84B' },
