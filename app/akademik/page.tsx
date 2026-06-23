@@ -107,7 +107,7 @@ export default function AkademikPage() {
               </div>
             </div>
             <div className="akademik-hero-img" style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 16, overflow: 'hidden' }}>
-              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="Akademik" style={{ width: '100%', height: 280, objectFit: 'cover' }} />
+              <img src="https://i.ibb.co.com/gMTL50pW/Screenshot-2026-06-23-085428.png" alt="Akademik" style={{ width: '100%', height: 280, objectFit: 'cover' }} />
             </div>
           </div>
         </div>
@@ -231,7 +231,7 @@ export default function AkademikPage() {
               </div>
             </div>
             <div className="metode-img" style={{ borderRadius: 16, overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80" alt="Pembelajaran" style={{ width: '100%', height: 380, objectFit: 'cover' }} />
+              <img src="https://i.ibb.co.com/DP4C6GqV/Screenshot-2026-06-23-085445.png" alt="Pembelajaran" style={{ width: '100%', height: 380, objectFit: 'cover' }} />
             </div>
           </div>
         </div>

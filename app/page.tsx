@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 const fotoSekolah = [
   'https://i.ibb.co.com/nNM0x0Rf/Whats-App-Image-2026-06-15-at-1-14-35-PM-1.jpg',
-  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=30',
+  'https://i.ibb.co.com/LhDNWB4b/Screenshot-2026-06-23-085612.png',
   'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300&q=30',
   'https://i.ibb.co.com/gMyZtQTB/Whats-App-Image-2026-06-15-at-1-14-37-PM.jpg',
 ]
